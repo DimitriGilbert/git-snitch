@@ -1,6 +1,6 @@
 {
   "name": "git-moar",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Advanced git reporting tools for developers - analyze commits, contributors, and cross-repository activity",
   "main": "bin/cli.js",
   "bin": {
@@ -30,10 +30,10 @@
   "preferGlobal": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/your-username/git-moar.git"
+    "url": "git+https://github.com/DimitriGilbert/git-moar.git"
   },
   "bugs": {
-    "url": "https://github.com/your-username/git-moar/issues"
+    "url": "https://github.com/DimitriGilbert/git-moar/issues"
   },
-  "homepage": "https://github.com/your-username/git-moar#readme"
+  "homepage": "https://github.com/DimitriGilbert/git-moar#readme"
 }
