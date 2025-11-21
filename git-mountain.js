@@ -70,6 +70,30 @@ Examples:
 `);
 }
 
+// --- Period Parsing ---
+
+function parsePeriodToGitSince(period) {
+  // Convert shorthand periods to formats Git reliably understands
+  const match = period.match(/^(\d+)([hdwmy])$/i);
+  if (match) {
+    const [, amount, unit] = match;
+    const unitMap = {
+      'h': 'hours',
+      'd': 'days', 
+      'w': 'weeks',
+      'm': 'months',
+      'y': 'years'
+    };
+    const fullUnit = unitMap[unit.toLowerCase()];
+    if (fullUnit) {
+      return `${amount} ${fullUnit} ago`;
+    }
+  }
+  
+  // If it doesn't match shorthand format, assume it's already in Git format
+  return period;
+}
+
 // --- Core Logic: Finding and Analyzing Repos ---
 
 function findGitRepositories(baseDir) {
@@ -122,7 +146,7 @@ function getRepoInfo(repoPath) {
 
 function getLinesOfCode(repoPath) {
     try {
-        const output = execSync('loc .', { cwd: repoPath, encoding: 'utf8', stdio: 'pipe' });
+        const output = execSync("loc . --include '\\.(ts|tsx|js|jsx|php)$' --exclude 'node_modules|dist|\\.next'", { cwd: repoPath, encoding: 'utf8', stdio: 'pipe' });
         const lines = output.split('\n');
         const totalLine = lines.find(line => line.startsWith(' Total'));
 
@@ -531,7 +555,8 @@ function main() {
 
     for (const repoPath of allRepoPaths) {
         try {
-            const gitLogCmd = `git log --since="${period}" --pretty=format:"%H|%an|%ae|%ad|%s" --date=iso --numstat`;
+            const gitSince = parsePeriodToGitSince(period);
+            const gitLogCmd = `git log --since="${gitSince}" --pretty=format:"%H|%an|%ae|%ad|%s" --date=iso --numstat`;
             const gitOutput = execSync(gitLogCmd, { cwd: repoPath, encoding: 'utf8', stdio: 'pipe' });
 
             if (gitOutput.trim().length > 0) {
