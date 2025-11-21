@@ -122,9 +122,10 @@ All reports feature:
 ## 🛠️ Development
 
 ### Prerequisites
-- Node.js 14+ 
+- Node.js 14+
 - Git (obviously!)
-- Optional: `loc` tool for lines of code analysis
+
+All dependencies are included in the package, including `sloc` for lines of code analysis.
 
 ### Project Structure
 ```
