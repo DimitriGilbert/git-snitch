@@ -25,7 +25,8 @@
     "node": ">=14.0.0"
   },
   "dependencies": {
-    "chalk": "^4.1.2"
+    "chalk": "^4.1.2",
+    "sloc": "^0.3.2"
   },
   "preferGlobal": true,
   "repository": {
